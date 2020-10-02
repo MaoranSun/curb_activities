@@ -1,7 +1,7 @@
 # Curb Dataset
 
-This curb activity dataset contains four format: VIA JSON format, VOC format, tfrecords and YOLO format.
-Latest dataset contains 15 classes: Walk Stand, Car, Van, Bus, Motorcycle, Babysitting, Riding bike, Children, Skateboarder, Taxi, Queuing, Sit, Truck, Performance, Riding scooter
+This curb activity dataset contains four format: **VIA JSON format**, **VOC format**, **tfrecords** and **YOLO format**.
+Latest dataset contains 15 classes: **Walk Stand, Car, Van, Bus, Motorcycle, Babysitting, Riding bike, Children, Skateboarder, Taxi, Queuing, Sit, Truck, Performance, Riding scooter**
 
 ## Conversion between formats:
 ### VIA to VOC:
