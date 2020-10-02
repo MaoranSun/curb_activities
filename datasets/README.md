@@ -1,6 +1,6 @@
 # Curb Dataset
 
-This curb activity dataset contains four format: **VIA JSON format**, **VOC format**, **tfrecords** and **YOLO format**.
+This curb activity dataset contains four format: [VIA JSON format](https://github.com/MaoranSun/curb_activities/tree/master/datasets#via-json), [VOC format](https://github.com/MaoranSun/curb_activities/tree/master/datasets#voc-format), [tfrecords](https://github.com/MaoranSun/curb_activities/tree/master/datasets#tfrecords) and [YOLO format](https://github.com/MaoranSun/curb_activities/tree/master/datasets#yolo).
 
 Latest dataset contains 15 classes: **Walk Stand, Car, Van, Bus, Motorcycle, Babysitting, Riding bike, Children, Skateboarder, Taxi, Queuing, Sit, Truck, Performance, Riding scooter**
 
