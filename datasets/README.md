@@ -31,14 +31,6 @@ path: /home/maoransu/curb_activities/datasets/tf_to_yolo.ipynb
 
 **Path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data
 
-**Training data label path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/train/annotations.json
-
-**Training data image path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/train/
-
-**Validation data label path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/val/annotations.json
-
-**Validation data image path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/val/
-
 ## VOC format
 
 **Path:** /home/maoransu/SSD_Mobile/models/research/object_detection/datasets/CURB_DATASET/
