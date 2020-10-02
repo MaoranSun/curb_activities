@@ -29,26 +29,24 @@ path: /home/maoransu/curb_activities/datasets/tf_to_yolo.ipynb
 
 **Training and validation data are stored in seperate folder.**
 
-Path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data
+**Path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data
 
-Training data label path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/train/annotations.json
+**Training data label path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/train/annotations.json
 
-Training data image path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/train/
+**Training data image path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/train/
 
-Validation data label path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/val/annotations.json
+**Validation data label path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/val/annotations.json
 
-Validation data image path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/val/
+**Validation data image path:** /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/val/
 
 ## VOC format
 
-**Training and validation data are stored in seperate folder.**
+**Path:** /home/maoransu/SSD_Mobile/models/research/object_detection/datasets/CURB_DATASET/
 
-Path: /home/maoransu/SSD_Mobile/models/research/object_detection/datasets/CURB_DATASET/
+## tfrecords
 
-Training data label path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/train/annotations.json
+**Path:** /home/maoransu/SSD_Mobile/models/research/object_detection/datasets/CURB_TF/
 
-Training data image path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/train/
+## YOLO
 
-Validation data label path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/val/annotations.json
-
-Validation data image path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine03/Training_data/val/
+**Path:** /home/maoransu/yolo/darknet/data/curb
