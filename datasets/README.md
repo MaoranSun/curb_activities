@@ -7,10 +7,10 @@ Latest dataset contains 15 classes: **Walk Stand, Car, Van, Bus, Motorcycle, Bab
 ## Conversion between formats:
 ### VIA to VOC:
 
-path: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/VIA-2-VOC.ipynb
+**Path**: /home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/VIA-2-VOC.ipynb
 
 ### VOC to tfrecords:
-path: /home/maoransu/SSD_Mobile/models/research/object_detection/dataset_tools/create_pascal_tf_record.py
+**Path**: /home/maoransu/SSD_Mobile/models/research/object_detection/dataset_tools/create_pascal_tf_record.py
 
 example usage:
 
@@ -23,7 +23,7 @@ example usage:
         
 ### tfrecords to YOLO
 
-path: /home/maoransu/curb_activities/datasets/tf_to_yolo.ipynb
+**Path**: /home/maoransu/curb_activities/datasets/tf_to_yolo.ipynb
 
 
 ## VIA JSON
