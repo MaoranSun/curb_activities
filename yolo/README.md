@@ -15,7 +15,7 @@ This part records the process of training curb model on YOLO. We tried yolo v4 a
 `./darknet detector test data/curb.data cfg/yolov4-curb.cfg backup/yolov4-curb_6000.weights -dont_show -ext_output < data/val.txt > result.txt`
 
 ### Performance:
-For thresh = 0.25, precision = 0.62, recall = 0.67
+For thresh = 0.25, precision = 0.62, recall = 0.67, mAP@0.50 = 0.54
 
 | Category | ap | Category | ap |
 | ----------- | ----------- | ----------- | ----------- |
