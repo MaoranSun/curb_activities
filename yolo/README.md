@@ -18,10 +18,13 @@ This part records the process of training curb model on YOLO. We tried yolo v4 a
 For thresh = 0.25, precision = 0.62, recall = 0.67
 
 | Category | ap |
-| ----------- | ----------- |
-| Walk Stand | 67.99% |
-| Walk Stand | 67.99% |
-| Walk Stand | 67.99% |
+| ----------- | ----------- | ----------- | ----------- |
+| Walk Stand | 67.99% | Car | 67.99% |
+| Van | 59.22% | Bus | 82.32% |
+| Motorcycle | 73.56% | Riding bike | 65.18% |
+| Children | 2.97% | Skateboarder | 62.71% |
+| Queuing | 14.4% | Sit | 46.67% |
+| Truck | 37.94% | Riding scooter | 66.57% |
 
 ## YOLO V4 tiny:
 ### Train:
