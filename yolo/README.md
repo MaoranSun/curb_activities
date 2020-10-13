@@ -16,7 +16,9 @@ This part records the process of training curb model on YOLO. We tried yolo v4 a
 
 ### Performance:
 For thresh = 0.25, precision = 0.62, recall = 0.67
+
 | Category | ap |
+| ----------- | ----------- |
 | Walk Stand | 67.99% |
 | Walk Stand | 67.99% |
 | Walk Stand | 67.99% |
