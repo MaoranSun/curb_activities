@@ -5,6 +5,10 @@ This part records the process of training curb model on Mask RCNN.
 ## 44 class:
 ### Path:
 home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine01
+
+![Image of class distribution]
+(https://github.com/MaoranSun/curb_activities/blob/master/Mask-RCNN/figs/curb_44class_count.png)
+
 ### Train:
 `./darknet detector train data/curb.data cfg/yolov4-curb.cfg weights/yolov4.conv.137 -gpus 0,1 -dont_show -mjpeg_port 8894 -map`
 
