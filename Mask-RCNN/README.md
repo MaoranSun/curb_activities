@@ -2,7 +2,7 @@
 
 This part records the process of training curb model on Mask RCNN.
 
-## 45 class:
+## 44 class:
 ### Path:
 home/maoransu/mrcnn/Mask_RCNN/samples/scooter_mask/dataset1700_combine01
 ### Train:
