@@ -1,0 +1,66 @@
+################ YOLO
+
+./darknet detector test cfg/coco.data cfg/yolov4.cfg weights/yolov4.weights -thresh 0.25
+
+./darknet detector test data/curb.data cfg/yolov4-curb.cfg weights/yolov4_curb.weights -dont_show -ext_output < data/val.txt > result.txt
+
+
+################ YOLO tiny
+
+
+######## Inference
+
+./darknet detector test data/curb.data cfg/yolov4-tiny-curb.cfg weights/yolov4-tiny-curb_best.weights data/testimg/01.jpg
+./darknet detector test data/curb.data cfg/yolov4-tiny-curb.cfg weights/yolov4-tiny-curb_best.weights data/testimg/download.jpeg
+
+./darknet detector test data/curb.data cfg/yolov4-tiny-curb.cfg weights/yolov4-tiny-curb_best.weights -dont_show -ext_output < data/val.txt > result-tiny.txt
+
+
+##### Run with python
+
+Inference on image
+
+python3 darknet_images.py \
+	--input=data/testimg \
+	--weights=weights/yolov4-tiny-curb_best.weights \
+	--dont_show \
+	--save_labels \
+	--config_file=cfg/yolov4-tiny-curb.cfg \
+	--data_file=data/curb.data
+
+python3 darknet_images.py \
+	--input=data/testimg \
+	--weights=weights/yolov4-tiny-curb_best.weights \
+	--save_labels \
+	--config_file=cfg/yolov4-tiny-curb.cfg \
+	--data_file=data/curb.data
+
+Inference on video
+
+python3 darknet_video.py \
+	--input=data/testvideo/test.mp4 \
+	--weights=weights/yolov4-tiny-curb_best.weights \
+	--dont_show \
+	--ext_output \
+	--config_file=cfg/yolov4-tiny-curb.cfg \
+	--data_file=data/curb.data
+
+python3 darknet_curb_video.py \
+	--input=data/testvideo/test.mp4 \
+	--out_filename=data/testvideo/res.avi \
+	--weights=weights/yolov4-tiny-curb_best.weights \
+	--dont_show \
+	--ext_output \
+	--config_file=cfg/yolov4-tiny-curb.cfg \
+	--data_file=data/curb.data
+
+python3 darknet_curb_video.py \
+	--out_filename=data/testvideo/curb.avi \
+	--out_db=data/result/curb \
+	--weights=weights/yolov4-tiny-curb_best.weights \
+	--dont_show \
+	--ext_output \
+	--config_file=cfg/yolov4-tiny-curb.cfg \
+	--data_file=data/curb.data
+
+
