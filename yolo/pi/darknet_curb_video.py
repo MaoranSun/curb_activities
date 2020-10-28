@@ -6,7 +6,6 @@ import darknet
 import time
 import cv2
 import numpy as np
-import darknet
 import datetime
 import sqlite3
 import paho.mqtt.client as mqtt
