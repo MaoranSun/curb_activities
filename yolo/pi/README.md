@@ -1,6 +1,6 @@
 # Curb model for raspberry pi
 
-This curb activities model is trained with custom dataset on [AlexeyAB's YOLO v4](https://github.com/AlexeyAB/darknet)
+This curb activities model is trained with custom dataset on [AlexeyAB's YOLO v4 implementation](https://github.com/AlexeyAB/darknet)
 
 ## Prerequisites
 
@@ -17,11 +17,11 @@ This curb activities model is trained with custom dataset on [AlexeyAB's YOLO v4
 
 ## Compilation
 
-For Raspberry Pi, the default settings should work, for other environments, make changes to `Makefile` according to [this link](https://github.com/AlexeyAB/darknet#how-to-compile-on-linux-using-make)
+For Raspberry Pi, the default settings should work. For other environments, make changes to `Makefile` according to [this link](https://github.com/AlexeyAB/darknet#how-to-compile-on-linux-using-make)
 
-Just do `make` in the darknet directory
+* Just do `make` in the darknet directory
 
-`pip install -r requirements.txt`
+* `pip install -r requirements.txt`
 
 ## Usage
 
