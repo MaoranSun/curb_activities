@@ -16,7 +16,7 @@ This model is trained with curb_activities dataset on [AlexeyAB's YOLO v4 implem
 
 For Raspberry Pi, the default settings should work.
 
-* Do `make` in the darknet directory
+* Do `make` in the root directory
 
 * `pip install -r requirements.txt`
 
