@@ -1,6 +1,6 @@
 # Curb model for raspberry pi
 
-This curb activities model is trained with custom dataset on [original YOLO v4](https://github.com/AlexeyAB/darknet)
+This curb activities model is trained with custom dataset on [AlexeyAB's YOLO v4](https://github.com/AlexeyAB/darknet)
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ This curb activities model is trained with custom dataset on [original YOLO v4](
 
 ## Compilation
 
-For Raspberry Pi, the default settings should work, for other environments, make changes to `Makefile` acoording to [this link](https://github.com/AlexeyAB/darknet#how-to-compile-on-linux-using-make)
+For Raspberry Pi, the default settings should work, for other environments, make changes to `Makefile` according to [this link](https://github.com/AlexeyAB/darknet#how-to-compile-on-linux-using-make)
 
 Just do `make` in the darknet directory
 
@@ -27,7 +27,7 @@ Just do `make` in the darknet directory
 
 #### run inference with webcam:
 
-This will save annotated video file to `data/testvideo/curb.avi`, store results to `data/result/curb_{start time}.sqlite`. If you don't want saved video file or sqlite, just remove the flags.
+This will save annotated video file to `data/testvideo/curb.avi`, store results to `data/result/curb_{start time}.sqlite`. If you don't want saved video or sqlite file, just remove the flags.
 
 ```
 python3 darknet_curb_video.py \
