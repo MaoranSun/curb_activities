@@ -151,7 +151,7 @@ def main():
                 # format result
                 re = count_result(detections, class_names)
                 # send result to mqtt
-                client.publish("RATP", json.dumps(re))
+                client.publish("RATP/Entries", json.dumps(re))
                 # save result to database
                 cur.execute('INSERT INTO inference_result (frameID, time, Walk_stand, Car, Van, Bus, Motorcycle, Riding_bike, Children, Skateboarder, Queuing, Sit, Truck, Riding_scooter) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [frameID, re['current_time'], re[class_names[0]], re[class_names[1]], re[class_names[2]], re[class_names[3]], re[class_names[4]], re[class_names[5]], re[class_names[6]], re[class_names[7]], re[class_names[8]], re[class_names[9]], re[class_names[10]], re[class_names[11]]])
                 conn.commit()
