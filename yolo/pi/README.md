@@ -1,6 +1,6 @@
-# Curb model for raspberry pi
+# Curb model on raspberry pi
 
-This curb activities model is trained with custom dataset on [AlexeyAB's YOLO v4 implementation](https://github.com/AlexeyAB/darknet)
+This model is trained with curb_activities dataset on [AlexeyAB's YOLO v4 implementation](https://github.com/AlexeyAB/darknet)
 
 ## Prerequisites
 
