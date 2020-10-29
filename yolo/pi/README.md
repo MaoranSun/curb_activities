@@ -19,7 +19,7 @@ This curb activities model is trained with custom dataset on [AlexeyAB's YOLO v4
 
 For Raspberry Pi, the default settings should work. For other environments, make changes to `Makefile` according to [this link](https://github.com/AlexeyAB/darknet#how-to-compile-on-linux-using-make)
 
-* Just do `make` in the darknet directory
+* Do `make` in the darknet directory
 
 * `pip install -r requirements.txt`
 
