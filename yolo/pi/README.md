@@ -4,7 +4,7 @@
 
 Just do `make` in the darknet directory
 
-required python package: numpy, cv2, sqlite3, paho
+`pip install -r requirements.txt`
 
 ### run inference with webcam:
 

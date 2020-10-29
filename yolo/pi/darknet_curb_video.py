@@ -83,7 +83,7 @@ def count_result(detections, class_names):
 
 def on_connect(client, userdata, flags, rc):
     print("Connected")
-    client.publish("RATP", json.dumps('{message: "Hello from python!"}'))
+    client.publish("RATP/Entries", json.dumps('{message: "Hello from python!"}'))
     
 def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
@@ -103,7 +103,7 @@ def main():
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
-    client.connect("localhost", 1883, 60)
+    client.connect("localhost")
     
     # read input, webcam or video file
     input_path = str2int(args.input)
