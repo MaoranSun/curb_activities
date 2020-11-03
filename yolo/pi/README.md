@@ -16,20 +16,7 @@ This model is trained with curb_activities dataset on [AlexeyAB's YOLO v4 implem
 
 For Raspberry Pi, the default settings should work.
 
-* Do `make` in the root directory
-
-* `pip3 install -r requirements.txt`
-
-* If cv2 installation doesn't work, please run following commands: [related article 1](https://www.raspberrypi.org/forums/viewtopic.php?t=232294) | [related article 2](https://www.pyimagesearch.com/2018/09/19/pip-install-opencv/)
-```
-sudo apt-get update
-sudo apt-get install libhdf5-dev
-sudo apt-get install libhdf5-serial-dev
-sudo apt-get install libatlas-base-dev
-sudo apt-get install libjasper-dev 
-sudo apt-get install libqtgui4 
-sudo apt-get install libqt4-test
-```
+* Do `bash install.sh` in the root directory
 
 ## Usage
 
@@ -41,6 +28,7 @@ This will save annotated video file to `data/testvideo/curb.avi`, store results 
 python3 darknet_curb_video.py \
 --out_filename=data/testvideo/curb.avi \
 --out_db=data/result/curb \
+--topic=RATP/Entries \
 --weights=weights/yolov4-tiny-curb_best.weights \
 --dont_show \
 --ext_output \
@@ -55,6 +43,7 @@ python3 darknet_curb_video.py \
 --input=data/testvideo/test.mp4 \
 --out_filename=data/result/res.avi \
 --out_db=data/result/curb \
+--topic=RATP/Entries \
 --weights=weights/yolov4-tiny-curb_best.weights \
 --dont_show \
 --ext_output \
