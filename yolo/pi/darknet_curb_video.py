@@ -16,9 +16,9 @@ def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
     parser.add_argument("--input", type=str, default=0,
                         help="video source. If empty, uses webcam 0 stream")
-    parser.add_argument("--out_filename", type=str, default="",
+    parser.add_argument("--out_filename", type=str,
                         help="inference video name. Not saved if empty")
-    parser.add_argument("--out_db", type=str, default="",
+    parser.add_argument("--out_db", type=str,
                         help="inference result database name. Not saved if empty")
     parser.add_argument("--weights", default="yolov4.weights",
                         help="yolo weights path")
@@ -34,6 +34,8 @@ def parser():
                         help="path to data file")
     parser.add_argument("--thresh", type=float, default=.25,
                         help="remove detections with confidence below this value")
+    parser.add_argument("--topic", type=str, default="RATP/Entries",
+                        help="topic to publish MQTT message")
     return parser.parse_args()
 
 def str2int(video_path):
@@ -73,25 +75,22 @@ def image_detection(frame, network, class_names, class_colors, thresh):
     return cv2.cvtColor(image, cv2.COLOR_BGR2RGB), detections
 
 def count_result(detections, class_names):
-    count_dict = {'current_time': datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds")}
+    count_dict = {}
+    return_dict = {'sampleTime': datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds")}
+    
     for cls in class_names:
         count_dict[cls] = 0
     for detection in detections:
         count_dict[detection[0]] += 1
+    for key in count_dict:
+        return_dict["count" + key.title().replace(" ", "")] = count_dict[key]
 
-    return count_dict
-
-def on_connect(client, userdata, flags, rc):
-    print("Connected")
-    client.publish("RATP/Entries", json.dumps('{message: "Hello from python!"}'))
-    
-def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload))
-    
+    return return_dict
     
 def main():
     # read user's input
     args = parser()
+    print("publish to ", args.topic)
     # initialize darknet
     network, class_names, class_colors = darknet.load_network(
             args.config_file,
@@ -101,8 +100,6 @@ def main():
         )
     # initialize mqtt client and connect to broker
     client = mqtt.Client()
-    client.on_connect = on_connect
-    client.on_message = on_message
     client.connect("localhost")
     
     # read input, webcam or video file
@@ -146,14 +143,15 @@ def main():
             anno_image, detections = image_detection(frame, network, class_names, class_colors, .25)
             darknet.print_detections(detections, args.ext_output)
             
+            # format result
+            re = count_result(detections, class_names)
+            # send result to mqtt
+            client.publish(args.topic, json.dumps(re))
+            
             # Store result to database
             if args.out_db is not None:
-                # format result
-                re = count_result(detections, class_names)
-                # send result to mqtt
-                client.publish("RATP/Entries", json.dumps(re))
                 # save result to database
-                cur.execute('INSERT INTO inference_result (frameID, time, Walk_stand, Car, Van, Bus, Motorcycle, Riding_bike, Children, Skateboarder, Queuing, Sit, Truck, Riding_scooter) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [frameID, re['current_time'], re[class_names[0]], re[class_names[1]], re[class_names[2]], re[class_names[3]], re[class_names[4]], re[class_names[5]], re[class_names[6]], re[class_names[7]], re[class_names[8]], re[class_names[9]], re[class_names[10]], re[class_names[11]]])
+                cur.execute('INSERT INTO inference_result (frameID, time, Walk_stand, Car, Van, Bus, Motorcycle, Riding_bike, Children, Skateboarder, Queuing, Sit, Truck, Riding_scooter) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [frameID, re['sampleTime'], re["count" + class_names[0].title().replace(" ", "")], re["count" + class_names[1].title().replace(" ", "")], re["count" + class_names[2].title().replace(" ", "")], re["count" + class_names[3].title().replace(" ", "")], re["count" + class_names[4].title().replace(" ", "")], re["count" + class_names[5].title().replace(" ", "")], re["count" + class_names[6].title().replace(" ", "")], re["count" + class_names[7].title().replace(" ", "")], re["count" + class_names[8].title().replace(" ", "")], re["count" + class_names[9].title().replace(" ", "")], re["count" + class_names[10].title().replace(" ", "")], re["count" + class_names[11].title().replace(" ", "")]])
                 conn.commit()
             
             # show image
@@ -175,4 +173,3 @@ def main():
     
 if __name__ == '__main__':
     main()
-    
