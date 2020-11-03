@@ -18,7 +18,18 @@ For Raspberry Pi, the default settings should work.
 
 * Do `make` in the root directory
 
-* `pip install -r requirements.txt`
+* `pip3 install -r requirements.txt`
+
+* If cv2 installation doesn't work, please run following commands:
+```
+sudo apt-get update
+sudo apt-get install libhdf5-dev
+sudo apt-get install libhdf5-serial-dev
+sudo apt-get install libatlas-base-dev
+sudo apt-get install libjasper-dev 
+sudo apt-get install libqtgui4 
+sudo apt-get install libqt4-test
+```
 
 ## Usage
 
