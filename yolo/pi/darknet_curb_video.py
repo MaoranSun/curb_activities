@@ -172,8 +172,6 @@ def main():
     cap.release()
     video.release()
     cv2.destroyAllWindows()
-    end = datetime.datetime.now()
-    print(end - start)
     
 if __name__ == '__main__':
     main()
