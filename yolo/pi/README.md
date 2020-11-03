@@ -20,7 +20,7 @@ For Raspberry Pi, the default settings should work.
 
 * `pip3 install -r requirements.txt`
 
-* If cv2 installation doesn't work, please run following commands:
+* If cv2 installation doesn't work, please run following commands: [related article 1](https://www.raspberrypi.org/forums/viewtopic.php?t=232294)[related article 2](https://www.pyimagesearch.com/2018/09/19/pip-install-opencv/)
 ```
 sudo apt-get update
 sudo apt-get install libhdf5-dev
