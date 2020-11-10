@@ -18,6 +18,8 @@ def parser():
                         help="video source. If empty, uses webcam 0 stream")
     parser.add_argument("--out_filename", type=str,
                         help="inference video name. Not saved if empty")
+    parser.add_argument("--save_infer", action='store_true',
+                        help="save inferenced video or raw video")
     parser.add_argument("--out_db", type=str,
                         help="inference result database name. Not saved if empty")
     parser.add_argument("--weights", default="yolov4.weights",
@@ -54,7 +56,7 @@ def set_saved_video(input_video, output_video, size, fps):
     fourcc = cv2.VideoWriter_fourcc(*"MJPG")
     #fps = input_video.get(cv2.CAP_PROP_FPS)
     #fps = int(input_video.get(cv2.CAP_PROP_FPS))
-    video = cv2.VideoWriter(output_video, fourcc, fps, size)
+    video = cv2.VideoWriter(output_video.replace('.', datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds")+'.'), fourcc, fps, size)
     return video
     
 def image_detection(frame, network, class_names, class_colors, thresh):
@@ -156,13 +158,16 @@ def main():
             
             # show image
             if not args.dont_show:
-                cv2.imshow('Inference', anno_image)
+                cv2.imshow('Inference', frame)
             
             # write video to file
             if args.out_filename is not None:
+                if args.save_infer:
                     anno_image = cv2.resize(anno_image, (w, h),
-                               interpolation=cv2.INTER_LINEAR)
+                        interpolation=cv2.INTER_LINEAR)
                     video.write(anno_image)
+                else:
+                    video.write(frame)
                     
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -173,3 +178,4 @@ def main():
     
 if __name__ == '__main__':
     main()
+
