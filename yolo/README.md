@@ -35,3 +35,15 @@ For thresh = 0.25, precision = 0.62, recall = 0.67, mAP@0.50 = 0.54
 
 ### Inference:
 
+### Performance:
+For thresh = 0.25, precision = 0.57, recall = 0.48, mAP@0.50 = 0.38
+
+| Category | ap | Category | ap |
+| ----------- | ----------- | ----------- | ----------- |
+| Walk Stand | 47.6% | Car | 51% |
+| Van | 39.66% | Bus | 61.50% |
+| Motorcycle | 56.83% | Riding bike | 48.69% |
+| Children | 2.97% | Skateboarder | 43.44% |
+| Queuing | 5.54% | Sit | 20.69% |
+| Truck | 17.42% | Riding scooter | 59.41% |
+
