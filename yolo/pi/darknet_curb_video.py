@@ -18,10 +18,14 @@ def parser():
                         help="video source. If empty, uses webcam 0 stream")
     parser.add_argument("--out_filename", type=str,
                         help="inference video name. Not saved if empty")
+    parser.add_argument("--out_img", type=str,
+                        help="inference image folder. Not saved if empty")
     parser.add_argument("--save_infer", action='store_true',
                         help="save inferenced video or raw video")
     parser.add_argument("--out_db", type=str,
                         help="inference result database name. Not saved if empty")
+    parser.add_argument("--vflip", action='store_true',
+                        help="vertical flip the video")
     parser.add_argument("--weights", default="yolov4.weights",
                         help="yolo weights path")
     parser.add_argument("--dont_show", action='store_true',
@@ -56,7 +60,7 @@ def set_saved_video(input_video, output_video, size, fps):
     fourcc = cv2.VideoWriter_fourcc(*"MJPG")
     #fps = input_video.get(cv2.CAP_PROP_FPS)
     #fps = int(input_video.get(cv2.CAP_PROP_FPS))
-    video = cv2.VideoWriter(output_video.replace('.', datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds")+'.'), fourcc, fps, size)
+    video = cv2.VideoWriter(output_video.replace('.', datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds")+'.').replace(':', '_'), fourcc, fps, size)
     return video
     
 def image_detection(frame, network, class_names, class_colors, thresh):
@@ -125,11 +129,16 @@ def main():
     multiplier = int(fps * seconds)
     
     # set saved video format and properties
-    video = set_saved_video(cap, args.out_filename, (w, h), 1 / seconds)
+    if args.out_filename is not None:
+        video = set_saved_video(cap, args.out_filename, (w, h), 1 / seconds)
+    if args.out_img is not None:
+        image_folder = args.out_img + "/" + datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds").replace(':', '_')
+        if not os.path.exists(image_folder):
+            os.makedirs(image_folder)
     
     # Init sql
     if args.out_db is not None:
-        conn = sqlite3.connect(args.out_db + datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds") + '.sqlite')
+        conn = sqlite3.connect(args.out_db + datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds").replace(':', '_') + '.sqlite')
         cur = conn.cursor()
         cur.execute('CREATE TABLE inference_result (frameID INTEGER, time TEXT, Walk_stand INTEGER, Car INTEGER, Van INTEGER, Bus INTEGER, Motorcycle INTEGER, Riding_bike INTEGER, Children INTEGER, Skateboarder INTEGER, Queuing INTEGER, Sit INTEGER, Truck INTEGER, Riding_scooter INTEGER)')
         conn.commit()
@@ -138,10 +147,13 @@ def main():
     while cap.isOpened():
         count += 1
         ret, frame = cap.read()
+        
         if not ret:
             break
         frameID = count
         if frameID % multiplier == 0:
+            if args.vflip:
+                frame = cv2.flip(frame, 0)
             anno_image, detections = image_detection(frame, network, class_names, class_colors, .25)
             darknet.print_detections(detections, args.ext_output)
             
@@ -168,6 +180,10 @@ def main():
                     video.write(anno_image)
                 else:
                     video.write(frame)
+            
+            # write images to folder
+            if args.out_img is not None:
+                cv2.imwrite(image_folder + "/" + datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds").replace(':', '_') + ".jpg", frame)
                     
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -178,4 +194,5 @@ def main():
     
 if __name__ == '__main__':
     main()
+
 
