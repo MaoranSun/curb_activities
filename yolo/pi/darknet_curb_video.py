@@ -10,6 +10,7 @@ import datetime
 import sqlite3
 import paho.mqtt.client as mqtt
 import json
+import uuid
 
 
 def parser():
@@ -80,9 +81,9 @@ def image_detection(frame, network, class_names, class_colors, thresh):
     image = darknet.draw_boxes(detections, image_resized, class_colors)
     return cv2.cvtColor(image, cv2.COLOR_BGR2RGB), detections
 
-def count_result(detections, class_names):
+def count_result(detections, class_names, unique_id):
     count_dict = {}
-    return_dict = {'sampleTime': datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds")}
+    return_dict = {'sampleTime': datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds"), 'unique_id':unique_id}
     
     for cls in class_names:
         count_dict[cls] = 0
@@ -140,7 +141,7 @@ def main():
     if args.out_db is not None:
         conn = sqlite3.connect(args.out_db + datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds").replace(':', '_') + '.sqlite')
         cur = conn.cursor()
-        cur.execute('CREATE TABLE inference_result (frameID INTEGER, time TEXT, Walk_stand INTEGER, Car INTEGER, Van INTEGER, Bus INTEGER, Motorcycle INTEGER, Riding_bike INTEGER, Children INTEGER, Skateboarder INTEGER, Queuing INTEGER, Sit INTEGER, Truck INTEGER, Riding_scooter INTEGER)')
+        cur.execute('CREATE TABLE inference_result (frameID INTEGER, unique_id TEXT, time TEXT, Walk_stand INTEGER, Car INTEGER, Van INTEGER, Bus INTEGER, Motorcycle INTEGER, Riding_bike INTEGER, Children INTEGER, Skateboarder INTEGER, Queuing INTEGER, Sit INTEGER, Truck INTEGER, Riding_scooter INTEGER)')
         conn.commit()
         
     count = 0
@@ -158,14 +159,17 @@ def main():
             darknet.print_detections(detections, args.ext_output)
             
             # format result
-            re = count_result(detections, class_names)
+            unique_id = str(uuid.uuid4())
+            re = count_result(detections, class_names, unique_id)
             # send result to mqtt
             client.publish(args.topic, json.dumps(re))
             
             # Store result to database
+            
+            
             if args.out_db is not None:
                 # save result to database
-                cur.execute('INSERT INTO inference_result (frameID, time, Walk_stand, Car, Van, Bus, Motorcycle, Riding_bike, Children, Skateboarder, Queuing, Sit, Truck, Riding_scooter) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [frameID, re['sampleTime'], re["count" + class_names[0].title().replace(" ", "")], re["count" + class_names[1].title().replace(" ", "")], re["count" + class_names[2].title().replace(" ", "")], re["count" + class_names[3].title().replace(" ", "")], re["count" + class_names[4].title().replace(" ", "")], re["count" + class_names[5].title().replace(" ", "")], re["count" + class_names[6].title().replace(" ", "")], re["count" + class_names[7].title().replace(" ", "")], re["count" + class_names[8].title().replace(" ", "")], re["count" + class_names[9].title().replace(" ", "")], re["count" + class_names[10].title().replace(" ", "")], re["count" + class_names[11].title().replace(" ", "")]])
+                cur.execute('INSERT INTO inference_result (frameID, unique_id, time, Walk_stand, Car, Van, Bus, Motorcycle, Riding_bike, Children, Skateboarder, Queuing, Sit, Truck, Riding_scooter) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [frameID, unique_id, re['sampleTime'], re["count" + class_names[0].title().replace(" ", "")], re["count" + class_names[1].title().replace(" ", "")], re["count" + class_names[2].title().replace(" ", "")], re["count" + class_names[3].title().replace(" ", "")], re["count" + class_names[4].title().replace(" ", "")], re["count" + class_names[5].title().replace(" ", "")], re["count" + class_names[6].title().replace(" ", "")], re["count" + class_names[7].title().replace(" ", "")], re["count" + class_names[8].title().replace(" ", "")], re["count" + class_names[9].title().replace(" ", "")], re["count" + class_names[10].title().replace(" ", "")], re["count" + class_names[11].title().replace(" ", "")]])
                 conn.commit()
             
             # show image
@@ -183,7 +187,8 @@ def main():
             
             # write images to folder
             if args.out_img is not None:
-                cv2.imwrite(image_folder + "/" + datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds").replace(':', '_') + ".jpg", frame)
+                #cv2.imwrite(image_folder + "/" + datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds").replace(':', '_') + ".jpg", frame)
+                cv2.imwrite(image_folder + "/" + unique_id + ".jpg", frame)
                     
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
