@@ -187,8 +187,8 @@ def main():
             
             # write images to folder
             if args.out_img is not None:
-                #cv2.imwrite(image_folder + "/" + datetime.datetime.now(datetime.timezone.utc).astimezone().isoformat("T", "seconds").replace(':', '_') + ".jpg", frame)
-                cv2.imwrite(image_folder + "/" + unique_id + ".jpg", frame)
+                cv2.imwrite(image_folder + "/" + str(round(datetime.datetime.now(datetime.timezone.utc).astimezone().timestamp())) + '_' + unique_id + ".jpg", frame)
+                #cv2.imwrite(image_folder + "/" + unique_id + ".jpg", frame)
                     
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
