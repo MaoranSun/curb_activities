@@ -27,6 +27,8 @@ def parser():
                         help="inference result database name. Not saved if empty")
     parser.add_argument("--vflip", action='store_true',
                         help="vertical flip the video")
+    parser.add_argument("--hflip", action='store_true',
+                        help="vertical flip the video")
     parser.add_argument("--weights", default="yolov4.weights",
                         help="yolo weights path")
     parser.add_argument("--dont_show", action='store_true',
@@ -155,6 +157,8 @@ def main():
         if frameID % multiplier == 0:
             if args.vflip:
                 frame = cv2.flip(frame, 0)
+            if args.hflip:
+                frame = cv2.flip(frame, 1)
             anno_image, detections = image_detection(frame, network, class_names, class_colors, .25)
             darknet.print_detections(detections, args.ext_output)
             
