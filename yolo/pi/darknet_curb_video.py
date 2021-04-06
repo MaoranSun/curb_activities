@@ -28,7 +28,7 @@ def parser():
     parser.add_argument("--vflip", action='store_true',
                         help="vertical flip the video")
     parser.add_argument("--hflip", action='store_true',
-                        help="vertical flip the video")
+                        help="horizontal flip the video")
     parser.add_argument("--weights", default="yolov4.weights",
                         help="yolo weights path")
     parser.add_argument("--dont_show", action='store_true',
